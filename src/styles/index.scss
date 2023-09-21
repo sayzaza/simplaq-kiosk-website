@@ -1,0 +1,16 @@
+// variables and colors
+@import './ui/variables';
+
+// ui components
+@import './ui/buttons';
+@import './ui/fonts';
+@import './ui/general';
+@import './ui/sidebars';
+@import './ui/skeleton.scss';
+@import './ui/tooltips';
+
+// pages
+@import './pages/floorplan';
+@import './pages/newsAndEvents';
+
+@import './tailwind.css';

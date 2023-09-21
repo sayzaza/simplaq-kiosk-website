@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "ignoreDeprecations": "5.0",
+    "target": "ESNext",
+    "module": "ESNext",
+    "strict": true,
+    "jsx": "preserve",
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "suppressImplicitAnyIndexErrors": true,
+    "allowSyntheticDefaultImports": true,
+    "declaration": false,
+    "emitDeclarationOnly": false,
+    "sourceMap": false,
+    "baseUrl": ".",
+    "skipLibCheck": true,
+	  /* "allowJs": true, */
+    "resolveJsonModule": true,
+    "lib": ["es2021", "es2017", "dom", "dom.iterable", "scripthost"],
+    "types": [
+      "node",
+      "vuetify",
+      "googlemaps",
+      // "element-plus/global"
+    ],
+    "paths": {
+      "@/*": ["src/*"]
+    },
+  },
+  "include": [
+    "src/**/*.json",
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "vite.config.ts"
+  ],
+  "exclude": ["node_modules"]
+}

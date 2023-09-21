@@ -1,0 +1,242 @@
+a .c-button {
+  text-decoration: underline;
+}
+.c-button {
+  display: flex;
+  flex-direction: row;
+  padding: 8px 20px 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none !important;
+  white-space: nowrap;
+  line-height: normal;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  .c-icon {
+    display: flex;
+    margin-right: 8px;
+  }
+
+  &--dark {
+    color: $white;
+    background-color: $black;
+  }
+
+  &--silver {
+    color: $black;
+    background-color: $grey-border;
+  }
+
+  &--silver:hover {
+    background-color: $grey-lighter;
+  }
+  &--silver.active {
+    background-color: $grey-lighter;
+  }
+
+  &--white {
+    color: $black;
+    border: 1px solid $grey-border;
+    background-color: $white;
+  }
+  &--white:hover {
+    background-color: $grey-border;
+  }
+  &--white.active {
+    background-color: $grey-border;
+  }
+  &--white.active-black {
+    background-color: $backgroundLightPrimary;
+    color: $white;
+    svg {
+      fill: $white !important;
+    }
+    svg path {
+      fill: $white;
+    }
+  }
+  &--green {
+    color: $white;
+    background-color: $green;
+  }
+  &--green:hover {
+    background-color: $green-dark;
+  }
+
+  // used mainly in /Floorplan route
+  &--transparent-with-borders {
+    color: $black;
+    border: 1px solid $grey-border;
+    background-color: transparent;
+  }
+  &--transparent-with-borders:hover {
+    background-color: $grey-border;
+  }
+  &--transparent-with-borders.active {
+    background-color: $floorplanActiveBtnBg;
+  }
+
+  &--transparent {
+    color: $black;
+    background-color: transparent;
+    border-color: transparent;
+    font-size: 12px;
+    padding: 8px 0;
+
+    svg path {
+      fill: $black;
+    }
+  }
+  &--center {
+    justify-content: center;
+  }
+
+  &:disabled {
+    background-color: $grey-light;
+    color: $grey-medium;
+  }
+}
+.c-button-big {
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  padding: 18px 30px;
+}
+
+.c-button-sm {
+  padding: 15px 12px;
+}
+
+.c-button-big-inline {
+  text-align: center;
+  justify-content: center;
+  padding: 18px 30px;
+}
+
+.c-button-big-slim {
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  padding: 14px 24px;
+}
+.c-button-small {
+  min-width: 56px;
+  height: 32px;
+  text-align: center;
+  color: $white;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 10px;
+
+  &--magenta {
+    background-color: $magenta;
+  }
+
+  &--blue {
+    background-color: $blue;
+  }
+  &--white {
+    color: $black;
+    border: 1px solid $grey-border;
+    background-color: $white;
+  }
+  &--white:hover {
+    background-color: $grey-border;
+  }
+  &--white.active {
+    background-color: $grey-border;
+  }
+  &--green {
+    background-color: $green-light;
+  }
+}
+
+.c-button-medium {
+  height: 46px;
+  padding: 4px 10px 4px 8px;
+}
+
+.c-button-big {
+  height: 54px;
+}
+
+.c-edit-button {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: $grey-border;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &.rounded-btn {
+    border-radius: 50%;
+  }
+
+  a {
+    color: initial;
+    text-decoration: none;
+  }
+
+  &-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    .c-icon {
+      margin-right: 16px;
+      svg {
+        fill: $black;
+      }
+    }
+  }
+
+  &-list {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    padding: 20px 17px 0 17px;
+    min-width: 172px;
+    background-color: $white;
+    box-shadow: 0px 32px 72px -8px rgba(95, 99, 102, 0.16);
+    border-radius: 8px;
+    transition: all 0.3s linear;
+    opacity: 0;
+    z-index: -1;
+  }
+
+  &.active {
+    .c-edit-button-list {
+      opacity: 1;
+      z-index: 1;
+    }
+  }
+}
+
+.c-icon svg {
+  fill: $backgroundLightPrimary;
+}
+.c-icon.fill-none svg {
+  fill: none;
+}
+
+.category-div.active .rounded-div{
+  background: theme('colors.greenLight2');
+}
+.category-div:hover .category svg,
+.category-div:hover .category svg path {
+  fill: $green;
+}
+.category-div.active .category svg,
+.category-div.active .category svg path {
+  fill: $green;
+}

@@ -1,0 +1,20 @@
+$font-path: '@/assets/fonts/inter/';
+$font-path-raleway: '@/assets/fonts/raleway/';
+@font-face {
+  font-family: 'Inter';
+  src: url('#{$font-path}Inter-VariableFont_slnt,wght.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Raleway';
+  src: url('#{$font-path-raleway}Raleway-VariableFont_wght.ttf') format('truetype');
+}
+
+// font styles for Portal app
+body #app {
+  font-family: 'Inter', sans-serif;
+}
+
+// font styles for Floorplan
+body #app .floorplan-wrapper {
+  font-family: 'Raleway', sans-serif;
+}

@@ -1,0 +1,11 @@
+<svg width="124" height="124" viewBox="0 0 124 124" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="62" cy="62" r="54" fill="#9E86B3"/>
+<path d="M45 62H79" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M45 51H79" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M56 78L51 85" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M69 78L73 85" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M74.1429 43H49.8571C47.1746 43 45 45.1368 45 47.7727V73.2273C45 75.8632 47.1746 78 49.8571 78H74.1429C76.8254 78 79 75.8632 79 73.2273V47.7727C79 45.1368 76.8254 43 74.1429 43Z" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M62 51V62" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M53 73C54.1046 73 55 72.1046 55 71C55 69.8954 54.1046 69 53 69C51.8954 69 51 69.8954 51 71C51 72.1046 51.8954 73 53 73Z" fill="white"/>
+<path d="M71 73C72.1046 73 73 72.1046 73 71C73 69.8954 72.1046 69 71 69C69.8954 69 69 69.8954 69 71C69 72.1046 69.8954 73 71 73Z" fill="white"/>
+</svg>
