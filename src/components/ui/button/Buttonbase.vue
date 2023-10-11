@@ -1,10 +1,10 @@
 <template>
   <button v-if="!to" class="c-button" :class="[{ active: activeState }, classname]" @click="emits('click')">
-    <Iconbase :name="icon" width="18" height="18" />
+    <Iconbase :name="props.icon" width="18" height="18" />
     {{ name }}
   </button>
   <RouterLink v-if="to" :to="to" class="c-button" :class="classname">
-    <iconbase :name="icon" width="18" height="18" />
+    <iconbase :name="props.icon" width="18" height="18" />
     {{ name }}
   </RouterLink>
 </template>

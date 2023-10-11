@@ -13,9 +13,9 @@
           </div>
         </div>
         <div class="w-full overflow-auto no-scrollbar h-[calc(100vh-228px)]">
-          <GridSystem v-if="!spinnerLoader" class="grid-colrs-1 sm:grid-cols-2">
+          <GridSystem v-if="!spinnerLoader" class="grid-cols-1 sm:grid-cols-2">
             <div
-              @click="openModal"
+              @click="openModal(item.id, index)"
               v-for="(item, index) in filteredNewsEventsArr"
               :key="item.id"
               class="w-full flex flex-col bg-white rounded-xl cursor-pointer overflow-hidden"
@@ -37,57 +37,49 @@
                   alt=""
                   :id="`mainImage2-${index}`"
                 />
+                <SkeletonLoader v-if="newsEventsSelected === newsEventsCategory.EVENTS" :loader-for="`mainImage-${index}`" :image="true" />
+                <SkeletonLoader v-if="newsEventsSelected === newsEventsCategory.NEWS" :loader-for="`mainImage2-${index}`" :image="true" />
               </div>
-              <SkeletonLoader 
-                v-if="newsEventsSelected === newsEventsCategory.EVENTS" 
-                :loader-for="`mainImage-${index}`" 
-                :image="true" 
-              />
-              <SkeletonLoader 
-                v-if="newsEventsSelected === newsEventsCategory.NEWS" 
-                :loader-for="`mainImage-${index}`" 
-                :image="true" 
-              />
               <div class="w-full h-full flex flex-col gap-3 py-4 px-5">
                 <div class="w-full flex items-center justify-between">
                   <div class="flex items-center gap-3">
                     <div class="flex items-center justify-center w-[32px] h-[32px] rounded-full font-raleway bg-backroundLightSeptenary">
                       <img
-                        @load="handleImageLoad(`logoImage2-${index}`)"
+                        @load="handleImageLoad(`logoImage-${index}`)"
                         v-if="item.picture_link"
-                        class="w-full max-w-[28px]"
+                        class="w-full rounded-full max-w-[28px] opacity-0 absolute"
                         :src="item.picture_link"
                         alt=""
                         :id="`logoImage-${index}`"
                       />
                       <img
-                        @load="handleImageLoad(`logoImage2-${index}`)" 
+                        @load="handleImageLoad(`logoImage2-${index}`)"
                         v-if="item.title_picture"
-                        class="w-full max-w-[28px]"
+                        class="w-full rounded-full max-w-[28px] opacity-0 absolute"
                         :src="item.title_picture"
                         alt=""
-                        :id="`logoImage2-${index}`" 
+                        :id="`logoImage2-${index}`"
+                      />
+                      <SkeletonLoader
+                        v-if="newsEventsSelected === newsEventsCategory.EVENTS"
+                        :loader-for="`logoImage-${index}`"
+                        :logo="true"
+                      />
+                      <SkeletonLoader
+                        v-if="newsEventsSelected === newsEventsCategory.NEWS"
+                        :loader-for="`logoImage2-${index}`"
+                        :logo="true"
                       />
                     </div>
-                    <SkeletonLoader 
-                      v-if="newsEventsSelected === newsEventsCategory.EVENTS" 
-                      :loader-for="`logoImage-${index}`" 
-                      :logo="true" 
-                    />
-                    <SkeletonLoader 
-                      v-if="newsEventsSelected === newsEventsCategory.NEWS" 
-                      :loader-for="`logoImage2-${index}`" 
-                      :logo="true" 
-                    />
                     <p class="font-raleway font-semibold text-xs text-backgroundLightPrimary leading-[16px]">{{ item.company.title }}</p>
                   </div>
                   <a
                     href="#"
                     class="border border-backroundLightSeptenary rounded-md p-2 text-xs font-raleway text-backgroundLightPrimary"
-                    >{{ 'trnslt'}}
-                  </a>
+                    >{{ 'trnslt' }}</a
+                  >
                 </div>
-                <div class="flex flex-col gap-1 h-ful pb-3 border-b border-b-backroundLightSeptenary">
+                <div class="flex flex-col gap-1 h-full pb-3 border-b border-b-backroundLightSeptenary">
                   <p class="font-raleway font-bold text-base text-backgroundLightPrimary leading-[24px]">
                     {{ item.title.length <= 18 ? item.title : item.title.slice(0, 18) + ' ...' }}
                   </p>
@@ -99,20 +91,19 @@
                   </p>
                 </div>
                 <div class="flex items-center gap-2 mt-auto">
-                  <iconbase 
-                    v-if="newsEventsCategory.EVENTS === newsEventsSelected" 
-                    name="EventsIcon" 
-                    width="20" 
-                    height="20" 
-                  />
-                  <iconbase 
-                    v-if="newsEventsCategory.NEWS === newsEventsSelected" 
-                    name="NewsIcon" 
-                    width="20" 
-                    height="20" 
-                  />
-                  <p class="text-black text-sm leading-[20px] font-raleway font-semibold">
-                    {{ newsDDMMYY[index].month + ' ' + newsDDMMYY[index].day + ', ' + newsDDMMYY[index].formattedTime }}
+                  <iconbase v-if="newsEventsCategory.EVENTS === newsEventsSelected" name="EventsIcon" width="20" height="20" />
+                  <iconbase v-if="newsEventsCategory.NEWS === newsEventsSelected" name="NewsIcon" width="20" height="20" />
+                  <p
+                    v-if="newsEventsCategory.NEWS === newsEventsSelected"
+                    class="text-black text-sm leading-[20px] font-raleway font-semibold"
+                  >
+                  {{ formatDate(filteredNewsEventsArr[index].publish_at).fullDate }}
+                  </p>
+                  <p
+                    v-if="newsEventsCategory.EVENTS === newsEventsSelected"
+                    class="text-black text-sm leading-[20px] font-raleway font-semibold"
+                  >
+                    {{ formatDate(filteredNewsEventsArr[index].start).fullDate }}
                   </p>
                 </div>
               </div>
@@ -132,20 +123,35 @@
   </PageSkeleton>
   <ModalLayout v-if="showModal" @closeModal="closeModal">
     <template #hero-image>
-      <img class="w-full rounded-xl max-h-[330px] object-cover" src="@/assets/img/cards/card1.png" />
+      <img
+        v-if="currentModalArr[0].title_picture"
+        class="w-full rounded-xl max-h-[450px] object-cover"
+        :src="currentModalArr[0].title_picture"
+      />
+      <img
+        v-if="currentModalArr[0].picture_link"
+        class="w-full rounded-xl max-h-[450px] object-cover"
+        :src="currentModalArr[0].picture_link"
+      />
     </template>
     <template #hero-info>
-      <p class="font-raleway font-bold text-black text-xl trackng-[-1%] text-black">Ice Masterclass - Fitness master burn your calories</p>
+      <p class="font-raleway font-bold text-black text-xl trackng-[-1%] text-black">{{ currentModalArr[0].title }}</p>
       <div class="flex items-center gap-3">
         <Iconbase name="EventsIcon" width="24" height="24" />
-        <p class="font-raleway font-semibold text-black text-base">Jan 16, 5:00 AM - Jan 18, 5:00 AM</p>
+        <p v-if="newsEventsSelected === newsEventsCategory.EVENTS" class="font-raleway font-semibold text-black text-base">
+          {{ formatDate(currentModalArr[0].start).fullDate }} - {{ formatDate(currentModalArr[0].finish).fullDate }}
+        </p>
+        <p v-if="newsEventsSelected === newsEventsCategory.NEWS" class="font-raleway font-semibold text-black text-base">
+          {{ formatDate(currentModalArr[0].publish_at).fullDate }}
+        </p>
       </div>
       <ModalBtn :btnData="modalBtnData" />
     </template>
     <template #body>
       <div class="flex flex-col gap-4">
-        <ModalInformation :modalInfo="modalInfoContact" />
-        <ModalInformation :modalInfo="modalInfoDescription" />
+        <!-- <ModalInformation :modalInfo="modalInfoContact" /> -->
+        <ModalInformation v-if="currentModalArr[0].article" :modalInfo="{title: 'description', text: currentModalArr[0].article,}" />
+        <ModalInformation v-if="currentModalArr[0].description" :modalInfo="{title: 'description', text: currentModalArr[0].description,}" />
       </div>
     </template>
   </ModalLayout>
@@ -155,10 +161,8 @@
 import { newsEventsArr, newsEvents, sidebar, Routes, RestApi, newsEventsCategory } from '@/imports'
 import { useFormatDate, FormatDateType } from '@/composebles/useDateFormat'
 import { ModalInformationProps, ModalBtnProps } from '@/types/modals/modalLayout.types'
-import { ref, onMounted, Ref } from 'vue'
+import { ref, onMounted, Ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { computed } from 'vue'
-
 
 onMounted(async () => {
   filteredNewsEventsArr.value = await handleFetch(newsEventsSelected.value)
@@ -192,9 +196,9 @@ const newsEventsFilter = [
 ] as newsEvents[]
 let newsEventsSelected = ref<newsEvents['filter']>(newsEventsFilter[0].filter)
 const spinnerLoader = ref<boolean>(true)
-
 // TODO: improve typing of newsEventsArr based on backed API
 const filteredNewsEventsArr: Ref<newsEventsArr[]> = ref([])
+const currentModalArr: Ref<newsEventsArr[]> = ref([])
 const sidebarArr = [
   {
     id: 0,
@@ -210,17 +214,18 @@ const sidebarArr = [
   }
 ] as sidebar[]
 
-const newsDDMMYY = computed<FormatDateType>(() => {
-  if (filteredNewsEventsArr.value) {
-    if (newsEventsSelected.value === newsEventsCategory.NEWS) {
-      return useFormatDate(filteredNewsEventsArr.value, 'publish_at')
-    } else if (newsEventsSelected.value === newsEventsCategory.EVENTS) {
-      return useFormatDate(filteredNewsEventsArr.value, 'start')
-    }
-  }
-  return []
-})
-
+// const newsDDMMYY = computed<FormatDateType>(() => {
+//   if (filteredNewsEventsArr.value) {
+//     if (newsEventsSelected.value === newsEventsCategory.NEWS) {
+//       return useFormatDate(filteredNewsEventsArr.value, 'publish_at')
+//     } else if (newsEventsSelected.value === newsEventsCategory.EVENTS) {
+//       return useFormatDate(filteredNewsEventsArr.value, 'start')
+//     }
+//   }
+//   return []
+// })
+// const imagesLoaded = ref<boolean[]>([])
+const { formatDate } = useFormatDate()
 const handleImageLoad = (id: string) => {
   if (id === 'mainImage-1') {
     console.log(id)
@@ -228,7 +233,7 @@ const handleImageLoad = (id: string) => {
   document.getElementById(id)?.classList.remove('opacity-0')
   document.getElementById(id)?.classList.remove('absolute')
   document.querySelector(`[loader-for=${id}]`)?.classList.add('hidden')
-} 
+}
 
 const handleFilter = async (filter: newsEvents['filter']) => {
   if (filter === newsEventsSelected.value) {
@@ -238,7 +243,6 @@ const handleFilter = async (filter: newsEvents['filter']) => {
   await handleFetch(newsEventsSelected.value).then(result => {
     filteredNewsEventsArr.value = result
   })
-  
 }
 
 const handleFetch = async (selectedFilter: newsEvents['filter']) => {
@@ -261,8 +265,7 @@ const getNews = async () => {
   } catch (error) {
     console.log(error)
   }
-} 
-
+}
 // get events data from backend API
 const getEvents = async () => {
   try {
@@ -272,10 +275,19 @@ const getEvents = async () => {
     console.log(error)
   }
 }
-
-const openModal = () => {
-  showModal.value = true
+const currentModalIndex = ref<number>(0)
+const openModal = (id: number, index: number) => {
+  const modalVal = filteredNewsEventsArr.value.find(item => item.id === id)
+  currentModalIndex.value = index
+  if (modalVal) {
+    showModal.value = true
+    currentModalArr.value = [modalVal] // Wrap modalVal in an array to match the type 'newsEventsArr[]'
+  } else {
+    console.error(`No item found with id: ${id}`)
+  }
+  console.log(currentModalArr.value)
 }
+
 const closeModal = () => {
   showModal.value = false
 }

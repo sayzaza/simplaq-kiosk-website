@@ -24,7 +24,7 @@ export default defineConfig(({ command, mode }) => {
     css: {
       preprocessorOptions: {
         scss: {
-          //additionalData: `@import "@/styles/ui/variables";`
+          // additionalData: @import "@/styles/ui/variables",
         }
       }
     },
@@ -49,7 +49,7 @@ export default defineConfig(({ command, mode }) => {
           changeOrigin: true,
           secure: false,
           headers: {
-            Origin: 'http://galeriesantovka.beta.mysimplaq.com' // replace with tenant url
+            Origin: 'http://galeriesantovka.beta.mysimplaq.com/' // replace with tenant url
           },
           configure: (proxy, options) => {
             proxy.on('error', (err, _req, _res) => {

@@ -1,27 +1,29 @@
-export enum newsEventsCategory {
-  NEWS = 'news',
-  EVENTS = 'events'
+export enum newsEventsCategory{
+  NEWS='news',
+  EVENTS='events',
 }
-
 interface Company {
-  title: string
+  title: string,
 }
-// TODO: improve typing based on backed API
 export interface newsEventsArr {
-  id: number
+  id: number,
   image: string
   logo: string
   logoTitle: string
   title: string
   description?: string
   article?: string
-  picture_link?: string
-  company: Company
-  title_picture?: string
+  picture_link?: string,
+  company: Company,
+  title_picture?: string,
   icon: string
   date: string
   action: string
-  category: newsEventsCategory
+  category: newsEventsCategory,
+  created_at?: string,
+  start?: string,
+  publish_at?: string,
+  finish? :string
 }
 
 export interface newsEvents {
@@ -30,6 +32,6 @@ export interface newsEvents {
 }
 
 export interface sidebar {
-  id: number
+  id: number,
   image: string
 }

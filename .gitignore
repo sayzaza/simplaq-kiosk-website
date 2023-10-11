@@ -22,4 +22,3 @@ pnpm-debug.log*
 *.sw?
 
 *kubeconfig*
-*config-map*.yaml

@@ -624,8 +624,9 @@
 }
 
 .mapboxgl-ctrl-bottom-left {
-  .mapboxgl-ctrl-logo {
-    cursor: unset;
+  .mapboxgl-ctrl:has(.mapboxgl-ctrl-logo) {
+    /* Styles applied to .mapboxgl-ctrl when it does include .mapboxgl-ctrl-logo */
+    display: none !important;
   }
 }
 

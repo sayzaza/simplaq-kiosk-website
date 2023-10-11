@@ -1,5 +1,5 @@
 <template>
-  <FilterBtns :showBtns="true" :pickers="floorPickerArr" :pickedIs="pickedIs" @pickBtn="pickBtn" />
+  <FilterBtns :showBtns="true" :pickers="floorPickerArr" :pickedIs="props.pickedIs" @pickBtn="pickBtn" />
 </template>
 
 <script setup lang="ts">

@@ -1208,14 +1208,6 @@ export function useFloorPlan() {
     })
   }
 
-  const removeMapboxLogoHref = () => {
-    // when DOM is fully rendered, remove mapbox logo href attributes.
-    const mapboxLogo = document.querySelector('.mapboxgl-ctrl-logo')
-    if (mapboxLogo) {
-      mapboxLogo.removeAttribute('href')
-    }
-  }
-
   return {
     activateMarkerAnimation,
     addFeaturesToMap,
@@ -1261,7 +1253,6 @@ export function useFloorPlan() {
     onSearch,
     polylabel,
     recenterMapLocal,
-    removeMapboxLogoHref,
     resetMapTimeout,
     resetMapToDefault,
     resetUI,

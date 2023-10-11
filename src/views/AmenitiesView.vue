@@ -11,7 +11,7 @@
               class="w-full flex flex-col bg-white rounded-xl cursor-pointer overflow-hidden"
             >
               <div class="w-full">
-                <img class="h-[250px] w-full object-cover object-top" :src="item.image" alt="" />
+                <img class="h-[250px] w-full object-cover object-top" :src="item.title" alt="" />
               </div>
               <div class="w-full flex flex-col gap-3 py-4 px-5">
                 <div class="flex flex-col gap-1">
@@ -55,11 +55,26 @@
 </template>
 
 <script lang="ts" setup>
-import { AmenitiesArr, AmenitiesSidebar, Routes } from '@/imports'
+import { AmenitiesArr, AmenitiesSidebar, Routes, RestApi } from '@/imports'
 import { ModalBtnProps, ModalInformationProps } from '@/types/modals/modalLayout.types'
-import { ref } from 'vue'
-
+import { ref, onMounted } from 'vue'
+// importing sidebar images
+import SidebarImg1 from '@/assets/img/sidebarItem.svg'
+import SidebarImg2 from '@/assets/img/sidebarItem2.svg'
+import SidebarImg3 from '@/assets/img/sidebarItem3.svg'
+onMounted(async()=> {
+  amenitiesArr.value = await getAmenities()
+})
 const showModal = ref<boolean>(false)
+const amenitiesArr = ref<AmenitiesArr[]>([])
+const getAmenities = async () => {
+  try {
+    const amenites = await RestApi.getAmenities()
+    return amenites.data.data.data
+  } catch (err) {
+    console.log(err)
+  }
+}
 
 const modalBtnData: ModalBtnProps = {
   to: Routes.NEWS_AND_EVENTS,
@@ -76,50 +91,18 @@ const modalInfoDescription: ModalInformationProps = {
           with the use of minimal equipment. It’s fast. It’s efficient. You get great results.`
 }
 
-const amenitiesArr = [
-  {
-    id: 0,
-    image: '/src/assets/img/amenities/item1.png',
-    title: 'parking',
-  },
-  {
-    id: 1,
-    image: '/src/assets/img/amenities/item2.png',
-    title: 'electric_shopping_carts',
-  },
-  {
-    id: 2,
-    image: '/src/assets/img/amenities/item3.png',
-    title: 'vending_machines',
-  },
-  {
-    id: 3,
-    image: '/src/assets/img/amenities/item4.png',
-    title: 'bitcoinmat',
-  },
-  {
-    id: 4,
-    image: '/src/assets/img/amenities/item5.png',
-    title: 'charging_station',
-  },
-  {
-    id: 5,
-    image: '/src/assets/img/amenities/item6.png',
-    title: 'info_desk',
-  },
-] as AmenitiesArr[]
 const sidebarArr = [
   {
     id: 0,
-    image: '/src/assets/img/sidebarItem.svg'
+    image: SidebarImg1
   },
   {
     id: 1,
-    image: '/src/assets/img/sidebarItem2.svg'
+    image: SidebarImg2
   },
   {
     id: 2,
-    image: '/src/assets/img/sidebarItem3.svg'
+    image: SidebarImg3
   }
 ] as AmenitiesSidebar[]
 

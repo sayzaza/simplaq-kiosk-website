@@ -9,7 +9,7 @@
             <div class="w-full flex justify-end">
               <Iconbase name="ClockIcon" width="40" height="40" />
             </div>
-            <p class="text-xl text-black font-raleway font-bold leading-[26px] tracking-[-1%]">{{$t('opening_hours')}}</p>
+            <p class="text-xl text-black font-raleway font-bold leading-[26px] tracking-[-1%]">{{ $t('opening_hours') }}</p>
           </div>
         </div>
         <RouterLink :to="Routes.BUSES" class="h-max w-full flex flex-col gap-4 px-0 cursor-pointer">
@@ -29,7 +29,7 @@
             <div class="w-full flex justify-end">
               <Iconbase name="WifiIcon" class="fill-none" width="40" height="40" />
             </div>
-            <p class="text-xl text-black font-raleway font-bold leading-[26px] tracking-[-1%]">{{$t('wifi')}}</p>
+            <p class="text-xl text-black font-raleway font-bold leading-[26px] tracking-[-1%]">{{ $t('wifi') }}</p>
           </div>
         </div>
       </GridSystem>
@@ -49,13 +49,13 @@
     </template>
     <template #body>
       <div class="flex flex-col gap-4">
-        <ModalOpening :day="$t('monday')" time="09:00 - 16:30"/>
-        <ModalOpening :day="$t('tuesday')" time="09:00 - 16:30"/>
-        <ModalOpening :day="$t('wednesday')" time="09:00 - 16:30"/>
-        <ModalOpening :day="$t('thursday')" time="09:00 - 16:30"/>
-        <ModalOpening :day="$t('friday')" time="09:00 - 16:30"/>
-        <ModalOpening :day="$t('sathurday')" :time="$t('closed')"/>
-        <ModalOpening :day="$t('sunday')" :time="$t('closed')"/>
+        <ModalOpening :day="$t('monday')" time="09:00 - 16:30" />
+        <ModalOpening :day="$t('tuesday')" time="09:00 - 16:30" />
+        <ModalOpening :day="$t('wednesday')" time="09:00 - 16:30" />
+        <ModalOpening :day="$t('thursday')" time="09:00 - 16:30" />
+        <ModalOpening :day="$t('friday')" time="09:00 - 16:30" />
+        <ModalOpening :day="$t('sathurday')" :time="$t('closed')" />
+        <ModalOpening :day="$t('sunday')" :time="$t('closed')" />
       </div>
     </template>
   </ModalLayout>
@@ -65,10 +65,10 @@
       <img class="w-full rounded-xl max-h-[330px] object-cover" src="@/assets/img/wifi.svg" />
     </template>
     <template #custom>
-        <div class="w-full py-5 bg-backroundLightSeptenary rounded-[20px] flex flex-col items-center">
-            <p class="font-raleway font-semibold text-black text-sm leading-[20px]">{{ $t('password') }}</p>
-            <p class="font-raleway font-bold text-black text-2xl leading-[32px] tracking-[-1%]">GalIERieHarfa</p>
-        </div>
+      <div class="w-full py-5 bg-backroundLightSeptenary rounded-[20px] flex flex-col items-center">
+        <p class="font-raleway font-semibold text-black text-sm leading-[20px]">{{ $t('password') }}</p>
+        <p class="font-raleway font-bold text-black text-2xl leading-[32px] tracking-[-1%]">GalIERieHarfa</p>
+      </div>
     </template>
   </ModalLayout>
 </template>
@@ -77,6 +77,11 @@
 import { AmenitiesSidebar, Routes } from '@/imports'
 import { ModalBtnProps, ModalInformationProps } from '@/types/modals/modalLayout.types'
 import { ref } from 'vue'
+
+// importing sidebar images
+import SidebarImg1 from "@/assets/img/sidebarItem.svg"
+import SidebarImg2 from "@/assets/img/sidebarItem2.svg"
+import SidebarImg3 from "@/assets/img/sidebarItem3.svg"
 
 const showModal = ref<boolean>(false)
 const showWifiModal = ref<boolean>(false)
@@ -98,15 +103,15 @@ const modalInfoDescription: ModalInformationProps = {
 const sidebarArr = [
   {
     id: 0,
-    image: '/src/assets/img/sidebarItem.svg'
+    image: SidebarImg1
   },
   {
     id: 1,
-    image: '/src/assets/img/sidebarItem2.svg'
+    image: SidebarImg2
   },
   {
     id: 2,
-    image: '/src/assets/img/sidebarItem3.svg'
+    image: SidebarImg3
   }
 ] as AmenitiesSidebar[]
 
@@ -114,7 +119,7 @@ const openModal = () => {
   showModal.value = true
 }
 const openWifiModal = () => {
-    showWifiModal.value = true
+  showWifiModal.value = true
 }
 const closeModal = () => {
   showModal.value = false

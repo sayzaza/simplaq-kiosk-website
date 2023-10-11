@@ -21,14 +21,26 @@ export class RestApi {
     return this.axios.get('/api/company-cats?per_page=1000')
   }
 
-  public static getEvents() {
-    return this.axios.get('/api/web-app/v1/events') 
-  }
-
   public static getNews() {
     return this.axios.get('/api/web-app/v1/news')
   }
+  public static getNewsById(id: number) {
+    return this.axios.get(`/api/web-app/v1/news/${id}`)
+  }
+
+  public static getEvents() {
+    return this.axios.get('/api/web-app/v1/events')
+  }
+
+  public static getAmentities() {
+    return this.axios.get('/api/web-app/v1/amenities')
+  }
+
   public static getRewards() {
     return this.axios.get("/api/web-app/v1/rewards")
+  }
+
+  public static getAmenities() {
+    return this.axios.get("/api/web-app/v1/floorplan/entities")
   }
 }

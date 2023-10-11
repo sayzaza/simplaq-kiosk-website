@@ -58,10 +58,9 @@ import ModalOpening from '@/components/modals/ModalOpening.vue'
 import FilterBtns from '@/components/ui/filterBtns/filterBtns.vue'
 import FloorFilterBtns from '@/components/ui/filterBtns/floorFilter.vue'
 import CategorySidebar from '@/components/ui/sidebar/categorySidebar/categorySidebar.vue'
-
 // Loaders
 import SpinnerLoader from '@/components/ui/loaders/SpinnerLoader.vue'
-import SkeletonLoader from '@/components/ui/loaders/SkeletonLoader.vue'
+import SkeletonLoader from "@/components/ui/loaders/SkeletonLoader.vue"
 // End loaders
 import Progress from '@/components/ui/progress/Progress.vue'
 

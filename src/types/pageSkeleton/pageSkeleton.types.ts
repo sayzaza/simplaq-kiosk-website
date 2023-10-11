@@ -1,4 +1,4 @@
 export type PageSkeletonProps = {
-    subPage?: boolean,
+    subPage: boolean,
     fromSubPageTo?: string, 
 }

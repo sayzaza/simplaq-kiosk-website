@@ -62,6 +62,11 @@
 import { AmenitiesSidebar, Routes, FilterBtnsArr } from '@/imports'
 import { ref } from 'vue'
 
+// importing sidebar images
+import SidebarImg1 from "@/assets/img/sidebarItem.svg"
+import SidebarImg2 from "@/assets/img/sidebarItem2.svg"
+import SidebarImg3 from "@/assets/img/sidebarItem3.svg"
+
 const busesFilter = [
   {
     title: 'public_transportation',
@@ -77,17 +82,17 @@ const handleFilter = (filter: FilterBtnsArr['value']) => {
   BusesFilterSelected.value = filter
 }
 const sidebarArr = [
-  {
+{
     id: 0,
-    image: '/src/assets/img/sidebarItem.svg'
+    image: SidebarImg1
   },
   {
     id: 1,
-    image: '/src/assets/img/sidebarItem2.svg'
+    image: SidebarImg2
   },
   {
     id: 2,
-    image: '/src/assets/img/sidebarItem3.svg'
+    image: SidebarImg3
   }
 ] as AmenitiesSidebar[]
 </script>

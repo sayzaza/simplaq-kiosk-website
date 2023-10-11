@@ -487,7 +487,6 @@ const {
   onSearch,
   polylabel,
   recenterMapLocal,
-  removeMapboxLogoHref,
   resetMapTimeout,
   resetUI,
   selectedLevel,
@@ -638,11 +637,6 @@ onMounted(async () => {
   map.value.once('load', mapLoaded)
   map.value.on('zoom', updateMarkersThrottled)
   map.value.on('click', checkToUnhighlightProperty)
-
-  nextTick(() => {
-    // when DOM is fully rendered, remove mapbox logo href attributes.
-    removeMapboxLogoHref()
-  })
 })
 
 onBeforeUnmount(() => {

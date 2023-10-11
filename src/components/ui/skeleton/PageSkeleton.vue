@@ -5,7 +5,7 @@
         <div class="flex flex-col min-h-[100vh] max-h-[100vh] rounded-[3em] bg-backroundLightSeptenary overflow-auto no-scrollbar">
           <div class="page-body-header">
             <div class="page-body-header__wrapper">
-              <div v-if="props.subPage" class="flex items-center gap-6">
+              <div v-if="props.subPage && props.fromSubPageTo" class="flex items-center gap-6">
                 <RouterLink :to="props.fromSubPageTo" class="w-[56px] h-[56px] bg-white rounded-full flex items-center justify-center">
                   <Iconbase name="ArrowLeftIcon" width="24" height="24" />
                 </RouterLink>
