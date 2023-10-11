@@ -28,4 +28,7 @@ export class RestApi {
   public static getNews() {
     return this.axios.get('/api/web-app/v1/news')
   }
+  public static getRewards() {
+    return this.axios.get("/api/web-app/v1/rewards")
+  }
 }
